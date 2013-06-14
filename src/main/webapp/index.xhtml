@@ -34,7 +34,7 @@
 				            <h:panelGroup id="locationMap">#{location.map}</h:panelGroup>  
 				        </p:column>
 				        <p:column styleClass="clipboard" headerText="Waypoint">
-				        	<button data-clipboard-text="#{mission.type}: #{location.name} at #{location.waypoint}" class="clipbutton"></button>
+				        	<button data-clipboard-text="#{guildMissionBean.missions[0].type}: #{location.name} at #{location.waypoint}" class="clipbutton"></button>
 				        </p:column>
 				        <p:column headerText="Dulfy">
 				        	<a href="#{location.help}" target="_blank">Dulfy</a>
@@ -53,7 +53,7 @@
 				            <h:panelGroup id="locationMap">#{location.map}</h:panelGroup>  
 				        </p:column>
 				        <p:column styleClass="clipboard" headerText="Waypoint">
-				        	<button data-clipboard-text="#{mission.type}: #{location.name} at #{location.waypoint}" class="clipbutton"></button>
+				        	<button data-clipboard-text="#{guildMissionBean.missions[1].type}: #{location.name} at #{location.waypoint}" class="clipbutton"></button>
 				        </p:column>
 				        <p:column headerText="Dulfy">
 				        	<a href="#{location.help}" target="_blank">Dulfy</a>
@@ -72,7 +72,7 @@
 				            <h:panelGroup id="locationMap">#{location.map}</h:panelGroup>  
 				        </p:column>
 				        <p:column styleClass="clipboard" headerText="Waypoint">
-				        	<button data-clipboard-text="#{mission.type}: #{location.name} at #{location.waypoint}" class="clipbutton"></button>
+				        	<button data-clipboard-text="#{guildMissionBean.missions[2].type}: #{location.name} at #{location.waypoint}" class="clipbutton"></button>
 				        </p:column>
 				        <p:column headerText="Dulfy">
 				        	<a href="#{location.help}" target="_blank">Dulfy</a>
