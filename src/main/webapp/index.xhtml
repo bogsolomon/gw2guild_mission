@@ -1,0 +1,88 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+    	<title>Guild Mission Locations</title>
+    	<link rel="stylesheet" type="text/css" href="css/events.css"/>
+        <script src="script/clipboard.js"></script>
+        <script src="script/datetime.js"></script>
+        <script src="script/ZeroClipboard.js"></script>
+        <script  type="text/javascript">
+		function startTime()
+		{
+			updateTimes();
+			updatePositions();
+			t=setTimeout(function(){startTime()},1000);
+		}
+		</script>
+    </h:head>
+    <h:body onload="startTime(); createClipboards();">
+    	 <h:form id="form">
+    	 	<p:poll interval="60"   
+            	listener="#{ajaxPollBean.updateEvents(rushTable, challengeTable, puzzleTable)}" 
+            	widgetVar="poll" autoStart="true"/>
+            	
+    	 	<p:accordionPanel multiple="true">
+    	 		<p:tab title="Rush">
+    	 			<p:dataTable binding="#{rushTable}" var="location" value="#{guildMissionBean.missions[0].locations}" styleClass="hide-column-names">
+        		 		<p:column headerText="Name">  
+				            <h:panelGroup id="locationName">#{location.name}</h:panelGroup>  
+				        </p:column>  
+				        <p:column headerText="Map">  
+				            <h:panelGroup id="locationMap">#{location.map}</h:panelGroup>  
+				        </p:column>
+				        <p:column styleClass="clipboard" headerText="Waypoint">
+				        	<button data-clipboard-text="#{mission.type}: #{location.name} at #{location.waypoint}" class="clipbutton"></button>
+				        </p:column>
+				        <p:column headerText="Dulfy">
+				        	<a href="#{location.help}" target="_blank">Dulfy</a>
+				        </p:column>
+				        <p:column headerText="State" styleClass="dateColumn">  
+				            <h:panelGroup id="locationState">#{location.state}</h:panelGroup>  
+				        </p:column>
+        		 	</p:dataTable>  
+    	 		</p:tab>
+    	 		<p:tab title="Challenge">
+    	 			<p:dataTable binding="#{challengeTable}" var="location" value="#{guildMissionBean.missions[1].locations}" styleClass="hide-column-names">
+        		 		<p:column headerText="Name">  
+				            <h:panelGroup id="locationName">#{location.name}</h:panelGroup>  
+				        </p:column>  
+				        <p:column headerText="Map">  
+				            <h:panelGroup id="locationMap">#{location.map}</h:panelGroup>  
+				        </p:column>
+				        <p:column styleClass="clipboard" headerText="Waypoint">
+				        	<button data-clipboard-text="#{mission.type}: #{location.name} at #{location.waypoint}" class="clipbutton"></button>
+				        </p:column>
+				        <p:column headerText="Dulfy">
+				        	<a href="#{location.help}" target="_blank">Dulfy</a>
+				        </p:column>
+				        <p:column headerText="State" styleClass="dateColumn">  
+				            <h:panelGroup id="locationState">#{location.state}</h:panelGroup>  
+				        </p:column>
+        		 	</p:dataTable>  
+    	 		</p:tab>	
+    	 		<p:tab title="Puzzle">
+    	 			<p:dataTable binding="#{puzzleTable}" var="location" value="#{guildMissionBean.missions[2].locations}" styleClass="hide-column-names">
+        		 		<p:column headerText="Name">  
+				            <h:panelGroup id="locationName">#{location.name}</h:panelGroup>  
+				        </p:column>  
+				        <p:column headerText="Map">  
+				            <h:panelGroup id="locationMap">#{location.map}</h:panelGroup>  
+				        </p:column>
+				        <p:column styleClass="clipboard" headerText="Waypoint">
+				        	<button data-clipboard-text="#{mission.type}: #{location.name} at #{location.waypoint}" class="clipbutton"></button>
+				        </p:column>
+				        <p:column headerText="Dulfy">
+				        	<a href="#{location.help}" target="_blank">Dulfy</a>
+				        </p:column>
+				        <p:column headerText="State" styleClass="dateColumn">  
+				            <h:panelGroup id="locationState">#{location.state}</h:panelGroup>  
+				        </p:column>
+        		 	</p:dataTable>  
+    	 		</p:tab>		  
+    	 	</p:accordionPanel>
+    	 </h:form>
+    </h:body>
+</html>
