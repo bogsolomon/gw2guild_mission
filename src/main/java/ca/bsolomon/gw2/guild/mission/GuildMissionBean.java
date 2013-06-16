@@ -82,6 +82,12 @@ public class GuildMissionBean implements Serializable {
 	}
 	
 	public List<Mission> getMissions() {
+		missions = new ArrayList<>();
+		
+		generateRushLocations();
+		generateChallengeLocations();
+		generatePuzzleLocations();
+		
 		return missions;
 	}
 

@@ -6,10 +6,10 @@ function updateTimes() {
 	    
 	    var values = content.split(':');
 	    
-	    if (values.length > 3) {
-	        var seconds = parseInt(values[3]);
-		    var minutes = parseInt(values[2]);
-		    var hours = parseInt(values[1]);
+	    if (values.length > 2) {
+	        var seconds = parseInt(values[2]);
+		    var minutes = parseInt(values[1]);
+		    //var hours = parseInt(values[1]);
 		    
 		    seconds++;
 		    
@@ -30,12 +30,8 @@ function updateTimes() {
 		    if (minutes < 10) {
 		    	minutes = "0"+minutes;
 		    }
-		    
-		    if (hours < 10) {
-		    	hours = "0"+hours;
-		    }
-		    
-		    elements[i].getElementsByTagName("span")[0].innerHTML = "Active: "+hours+":"+minutes+":"+seconds;
+		    		    
+		    elements[i].getElementsByTagName("span")[0].innerHTML = "Active: "+minutes+":"+seconds;
 	    }
 	}
 }
