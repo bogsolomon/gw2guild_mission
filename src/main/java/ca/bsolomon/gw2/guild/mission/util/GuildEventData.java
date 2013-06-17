@@ -23,6 +23,7 @@ public class GuildEventData implements EventData{
 	private static int rushIndex = 1;
 	
 	private static Map<GuildPuzzleEvent, String> puzzleStatus = new ConcurrentHashMap<>(16, 0.9f, 1);
+	private static Map<GuildBountyEvent, String> bountyStatus = new ConcurrentHashMap<>(16, 0.9f, 1);
 	private static Map<GuildChallengeEvent, String> challengeStatus = new ConcurrentHashMap<>(16, 0.9f, 1);
 	
 	private static Map<String, String> eventIdToMapId = new HashMap<>();
@@ -160,5 +161,27 @@ public class GuildEventData implements EventData{
 				puzzleStatus.put(event, "Not Active");
 			}
 		}
+	}
+
+	public static void formatBountyStatus() {
+		DateTime now = new DateTime(gregorianJuian);
+		
+		for (GuildBountyEvent event:GuildBountyEvent.values()) {
+			if (eventStatus.get(event.getUid()).equals(ACTIVE)) {
+				DateTime time = eventTime.get(event.getUid());
+				
+				Period period = new Period(time, now);
+				
+				String periodStr = MMSSFormater.print(period);
+				
+				bountyStatus.put(event, "Active: "+ periodStr);
+			} else {
+				bountyStatus.put(event, "Not Active");
+			}
+		}
+	}
+
+	public static Map<GuildBountyEvent, String> getBountyStatus() {
+		return bountyStatus;
 	}
 }

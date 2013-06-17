@@ -10,6 +10,7 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import ca.bsolomon.gw2.guild.mission.util.GuildBountyEvent;
 import ca.bsolomon.gw2.guild.mission.util.GuildChallengeEvent;
 import ca.bsolomon.gw2.guild.mission.util.GuildEventData;
 import ca.bsolomon.gw2.guild.mission.util.GuildPuzzleEvent;
@@ -49,8 +50,13 @@ public class GuildEventRetrieveJob extends DataRetrieveJob implements Job {
 			queryEvent(gregorianJulian, "1013", event.getUid(), guildEventData);
 		}
 		
+		for (GuildBountyEvent event:GuildBountyEvent.values()) {
+			queryEvent(gregorianJulian, "1013", event.getUid(), guildEventData);
+		}
+		
 		GuildEventData.formatRushStatus();
 		GuildEventData.formatChallengeStatus();
 		GuildEventData.formatPuzzleStatus();
+		GuildEventData.formatBountyStatus();
 	}
 }

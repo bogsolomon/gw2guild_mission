@@ -21,7 +21,7 @@
     <h:body onload="startTime(); createClipboards();">
     	 <h:form id="form">
     	 	<p:poll interval="60"   
-            	listener="#{ajaxPollBean.updateEvents(rushTable, challengeTable, puzzleTable)}" 
+            	listener="#{ajaxPollBean.updateEvents(rushTable, challengeTable, puzzleTable, bountyTable)}" 
             	widgetVar="poll" autoStart="true"/>
             	
     	 	<p:accordionPanel multiple="true">
@@ -81,7 +81,26 @@
 				            <h:panelGroup id="locationState">#{location.state}</h:panelGroup>  
 				        </p:column>
         		 	</p:dataTable>  
-    	 		</p:tab>		  
+    	 		</p:tab>		
+    	 		<p:tab title="Bounty">
+    	 			<p:dataTable binding="#{bountyTable}" var="location" value="#{guildMissionBean.missions[3].locations}" styleClass="hide-column-names">
+        		 		<p:column headerText="Name">  
+				            <h:panelGroup id="locationName">#{location.name}</h:panelGroup>  
+				        </p:column>  
+				        <p:column headerText="Map">  
+				            <h:panelGroup id="locationMap">#{location.map}</h:panelGroup>  
+				        </p:column>
+				        <p:column styleClass="clipboard" headerText="Waypoint">
+				        	<button data-clipboard-text="#{guildMissionBean.missions[3].type}: #{location.name} in #{location.map}" class="clipbutton"></button>
+				        </p:column>
+				        <p:column headerText="Dulfy">
+				        	<a href="#{location.help}" target="_blank">Dulfy</a>
+				        </p:column>
+				        <p:column headerText="State" styleClass="dateColumn">  
+				            <h:panelGroup id="locationState">#{location.state}</h:panelGroup>  
+				        </p:column>
+        		 	</p:dataTable>  
+    	 		</p:tab>	  
     	 	</p:accordionPanel>
     	 </h:form>
     </h:body>

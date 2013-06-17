@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import org.omnifaces.util.Ajax;
 import org.primefaces.component.datatable.DataTable;
 
+import ca.bsolomon.gw2.guild.mission.util.GuildBountyEvent;
 import ca.bsolomon.gw2.guild.mission.util.GuildChallengeEvent;
 import ca.bsolomon.gw2.guild.mission.util.GuildEventData;
 import ca.bsolomon.gw2.guild.mission.util.GuildPuzzleEvent;
@@ -21,12 +22,30 @@ public class AjaxPollBean {
 	
 	private ConcurrentMap<String, String> eventMap = new ConcurrentHashMap<>(70, 0.9f, 1);
 	
-	public void updateEvents(DataTable rushTable, DataTable chalTable, DataTable puzzleTable) {
+	public void updateEvents(DataTable rushTable, DataTable chalTable, DataTable puzzleTable, DataTable bountyTable) {
 		checkStatusRush(rushTable, GuildEventData.getRushStatus());
 		checkStatusChallenge(chalTable, GuildEventData.getChallengeStatus());
 		checkStatusPuzzle(puzzleTable, GuildEventData.getPuzzleStatus());
+		checkStatusBounty(bountyTable, GuildEventData.getBountyStatus());
 	}
 	
+	private void checkStatusBounty(DataTable bountyTable,
+			Map<GuildBountyEvent, String> bountyStatus) {
+		boolean toUpdate = false;
+		
+		for (GuildBountyEvent bounty:GuildBountyEvent.values()) {
+			String keyName = "bounty-"+bounty.getUid();
+			
+			String status = bountyStatus.get(bounty);
+			
+			toUpdate = checkEventStatus(toUpdate, keyName, status);
+		}
+		
+		if (toUpdate) {
+			Ajax.update(bountyTable.getClientId());
+		}
+	}
+
 	private void checkStatusPuzzle(DataTable servTable,
 			Map<GuildPuzzleEvent, String> puzzleStatus) {
 		boolean toUpdate = false;

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import ca.bsolomon.gw2.guild.mission.util.GuildBountyEvent;
 import ca.bsolomon.gw2.guild.mission.util.GuildChallengeEvent;
 import ca.bsolomon.gw2.guild.mission.util.GuildEventData;
 import ca.bsolomon.gw2.guild.mission.util.GuildPuzzleEvent;
@@ -21,6 +22,7 @@ public class GuildMissionBean implements Serializable {
 	private static final String DULFY_RUSH = "http://dulfy.net/2013/03/17/gw2-guild-rush-guild-mission-guide/";
 	private static final String DULFY_CHALLENGE = "http://dulfy.net/2013/04/20/gw2-guild-challenge-guild-mission-guide/";
 	private static final String DULFY_PUZZLE = "http://dulfy.net/2013/04/28/gw2-guild-puzzles-guild-mission-guide/";
+	private static final String DULFY_BOUNTY = "http://dulfy.net/2013/02/27/gw2-guild-bounty-guide/";
 
 	/**
 	 * 
@@ -33,6 +35,7 @@ public class GuildMissionBean implements Serializable {
 		generateRushLocations();
 		generateChallengeLocations();
 		generatePuzzleLocations();
+		generateBountyLocations();
 	}
 
 	private void generateRushLocations() {
@@ -88,7 +91,37 @@ public class GuildMissionBean implements Serializable {
 		generateChallengeLocations();
 		generatePuzzleLocations();
 		
+		generateBountyLocations();
+		
 		return missions;
+	}
+
+	private void generateBountyLocations() {
+		Mission mission = new Mission();
+		mission.setType("Bounty");
+		
+		List<Location> locations = new ArrayList<>();
+		locations.add(new Location("2-Mult", "Timberline Falls", "", DULFY_BOUNTY+"#0", GuildEventData.getBountyStatus().get(GuildBountyEvent.Two_Mult)));
+		locations.add(new Location("Ander \"Wildman\" Westward", "Southsun Cove", "", DULFY_BOUNTY+"#1", GuildEventData.getBountyStatus().get(GuildBountyEvent.Ander_Wildman)));
+		locations.add(new Location("Big Mayana", " 	Sparkfly Fen", "", DULFY_BOUNTY+"#1b", GuildEventData.getBountyStatus().get(GuildBountyEvent.Big_Mayana)));
+		locations.add(new Location("Bookworm Bwikki", "Lornar’s Pass", "", DULFY_BOUNTY+"#2", GuildEventData.getBountyStatus().get(GuildBountyEvent.Bookworm_Bwikki)));
+		locations.add(new Location("Brekkabek", "Harathi Hinterlands", "", DULFY_BOUNTY+"#3", GuildEventData.getBountyStatus().get(GuildBountyEvent.Brekkabek)));
+		locations.add(new Location("Crusader Michiele", "Sparkfly Fens", "", DULFY_BOUNTY+"#4", GuildEventData.getBountyStatus().get(GuildBountyEvent.Crusader_Michiele)));
+		locations.add(new Location("Deputy Brooke", "Snowden Drifts", "", DULFY_BOUNTY+"#5", GuildEventData.getBountyStatus().get(GuildBountyEvent.Brooke)));
+		locations.add(new Location("Devious Teesa", "Frostgorge Sound", "", DULFY_BOUNTY+"#6", GuildEventData.getBountyStatus().get(GuildBountyEvent.Devious_Teesa)));
+		locations.add(new Location("Diplomat Tarban", "Brisban Wildlands", "", DULFY_BOUNTY+"#7", GuildEventData.getBountyStatus().get(GuildBountyEvent.Diplomat_Tarban)));
+		locations.add(new Location("Half Baked Kamali", "Mount Maelstrom", "", DULFY_BOUNTY+"#8", GuildEventData.getBountyStatus().get(GuildBountyEvent.Half_Baked_Kamali)));
+		locations.add(new Location("Poobadoo", "Kessex Hills", "", DULFY_BOUNTY+"#9", GuildEventData.getBountyStatus().get(GuildBountyEvent.Poobadoo)));
+		locations.add(new Location("Prisoner 1411", "Iron Marshes", "", DULFY_BOUNTY+"#10", GuildEventData.getBountyStatus().get(GuildBountyEvent.Prisoner_1141)));
+		locations.add(new Location("Shaman Arderus", "Fireheart Rise", "", DULFY_BOUNTY+"#11", GuildEventData.getBountyStatus().get(GuildBountyEvent.Shaman_Arderus)));
+		locations.add(new Location("Short-Fuse Felix", "Diessa Plateau", "", DULFY_BOUNTY+"#12", GuildEventData.getBountyStatus().get(GuildBountyEvent.Short_Fuse_Felix)));
+		locations.add(new Location("Sotzz the Scallywag", "Gendarran Fields", "", DULFY_BOUNTY+"#13", GuildEventData.getBountyStatus().get(GuildBountyEvent.Sotzz_the_Scallywag)));
+		locations.add(new Location("Tricksy Trekksa", "Blazeridge Steppes", "", DULFY_BOUNTY+"#14", GuildEventData.getBountyStatus().get(GuildBountyEvent.Tricksy_Trekksa)));
+		locations.add(new Location("Trillia Midwell", "Fields of Ruin", "", DULFY_BOUNTY+"#15", GuildEventData.getBountyStatus().get(GuildBountyEvent.Trillia_Midwell)));
+		locations.add(new Location("Yanonka the Rat-Wrangler", "Fields of Ruin", "", DULFY_BOUNTY+"#16", GuildEventData.getBountyStatus().get(GuildBountyEvent.Yanonka)));
+		
+		mission.setLocations(locations);
+		missions.add(mission);
 	}
 
 	public void setMissions(List<Mission> missions) {
