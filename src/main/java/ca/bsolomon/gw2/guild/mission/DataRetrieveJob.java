@@ -1,12 +1,11 @@
 package ca.bsolomon.gw2.guild.mission;
 
-import net.sf.json.JSONObject;
-
 import org.joda.time.Chronology;
 import org.joda.time.DateTime;
 
 import ca.bsolomon.gw2.guild.mission.util.EventData;
 import ca.bsolomon.gw2event.api.GW2EventsAPI;
+import ca.bsolomon.gw2event.api.dao.Event;
 
 public class DataRetrieveJob {
 
@@ -14,11 +13,11 @@ public class DataRetrieveJob {
 	
 	protected boolean queryEvent(Chronology gregorianJuian,
 			String serverId, String eventUID, EventData dataStructure) {
-		JSONObject result = api.queryServer(serverId, eventUID);
+		Event result = api.queryServer(serverId, eventUID);
 		boolean changed = false;
 		
 		if (result != null) {
-			if (dataStructure.addEventStatus(serverId, eventUID, result.getString("state"), new DateTime(gregorianJuian), result.getString("map_id"))) {
+			if (dataStructure.addEventStatus(serverId, eventUID, result.getState(), new DateTime(gregorianJuian), result.getMapId())) {
 				changed = true;
 			}
 		}
